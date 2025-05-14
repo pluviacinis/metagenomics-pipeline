@@ -1,0 +1,4 @@
+name: /home/pluvia/envs/deepvirfinder
+channels:
+  - defaults
+prefix: /home/pluvia/envs/deepvirfinder

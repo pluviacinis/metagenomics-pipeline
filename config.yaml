@@ -1,0 +1,8 @@
+samples: ["sample1"]
+raw_reads_dir: "../data/raw"
+results_dir: "../results"
+contig_min_length: 1000
+threads: 4
+phamb_script: "../phamb/phamb/run_RF.py"
+
+

@@ -1,0 +1,4 @@
+name: /home/pluvia/envs/phamb
+channels:
+  - defaults
+prefix: /home/pluvia/envs/phamb

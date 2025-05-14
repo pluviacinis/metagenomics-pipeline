@@ -1,0 +1,4 @@
+name: /home/pluvia/envs/megahit
+channels:
+  - defaults
+prefix: /home/pluvia/envs/megahit

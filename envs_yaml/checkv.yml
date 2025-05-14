@@ -1,0 +1,4 @@
+name: /home/pluvia/envs/checkv
+channels:
+  - defaults
+prefix: /home/pluvia/envs/checkv

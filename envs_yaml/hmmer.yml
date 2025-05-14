@@ -1,0 +1,4 @@
+name: /home/pluvia/envs/hmmer
+channels:
+  - defaults
+prefix: /home/pluvia/envs/hmmer

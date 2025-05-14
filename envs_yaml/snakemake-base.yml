@@ -1,0 +1,6 @@
+name: snakemake-base
+channels:
+  - defaults
+dependencies:
+  - snakemake
+prefix: /home/pluvia/miniconda3/envs/snakemake-base

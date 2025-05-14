@@ -1,0 +1,4 @@
+name: /home/pluvia/envs/strobealign
+channels:
+  - defaults
+prefix: /home/pluvia/envs/strobealign
