@@ -80,7 +80,7 @@ rule vamb:
     output:
         clusters = os.path.join(config["results_dir"], "vamb/vae_clusters_unsplit.tsv"),
         metadata = os.path.join(config["results_dir"], "vamb/vae_clusters_metadata.tsv")
-    conda: "./envs/vamb"
+    conda: "../envs/vamb"
     log: "../workflow/logs/vamb.log"
     shell:
         """
