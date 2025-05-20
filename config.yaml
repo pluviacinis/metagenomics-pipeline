@@ -1,9 +1,8 @@
 samples: ["sample1"]
 raw_reads_dir: "../data/raw"
 results_dir: "../results"
-contig_min_length: 1000
+contig_min_length: 2000  # Для Megahit, VAMB и PHAMB
 threads: 4
 phamb_script: "../phamb/phamb/run_RF.py"
-vog_db: "../data/db/hmm/vogdb.hmm"       # VOGDB (HMM)
-miComplete_db: "../data/db/hmm/miComplete.hmm"  # MiComplete (HMM)
-
+vog_db: "../data/db/hmm/vogdb.hmm"
+miComplete_db: "../data/db/hmm/miComplete.hmm"
