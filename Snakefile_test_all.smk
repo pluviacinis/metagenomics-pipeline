@@ -80,7 +80,7 @@ rule vamb:
     output:
         clusters = os.path.join(config["results_dir"], "vamb/vae_clusters_unsplit.tsv"),
         metadata = os.path.join(config["results_dir"], "vamb/vae_clusters_metadata.tsv")
-    conda: "../envs/vamb"
+    conda: "./envs/vamb"
     log: "../workflow/logs/vamb.log"
     shell:
         """
@@ -118,10 +118,7 @@ rule hmmer_vog:
     log: "../workflow/logs/hmmer_vog.log"
     threads: 4
     shell:
-        """
-        hmmscan --cpu {threads} --tblout {output.annotations} {params.db} {input.proteins} 2> {log}
-        awk 'BEGIN{{OFS="\\t"}} !/^#/ {{sub(/_[0-9]+$/, "", $3); print}}' {output.annotations} > tmp && mv tmp {output.annotations}
-        """
+        "hmmscan --cpu {threads} --tblout {output.annotations} {params.db} {input.proteins} 2> {log}"
 
 rule hmmer_micomplete:
     input:
@@ -134,10 +131,7 @@ rule hmmer_micomplete:
     log: "../workflow/logs/hmmer_micomplete.log"
     threads: 4
     shell:
-        """
-        hmmscan --cpu {threads} --tblout {output.annotations} {params.db} {input.proteins} 2> {log}
-        awk 'BEGIN{{OFS="\\t"}} !/^#/ {{sub(/_[0-9]+$/, "", $3); print}}' {output.annotations} > tmp && mv tmp {output.annotations}
-        """
+        "hmmscan --cpu {threads} --tblout {output.annotations} {params.db} {input.proteins} 2> {log}"
 
 rule deepvirfinder:
     input:
@@ -151,10 +145,8 @@ rule deepvirfinder:
         r"""
         cd ../DeepVirFinder
         ./dvf.py -i "{input.contigs}" -o "$(dirname {output.predictions})" -l 1000 2> {log}
-        awk 'BEGIN{{OFS="\\t"}} 
-            NR==1 {{print "contig", "score", "pvalue"}} 
-            NR>1 {{gsub(/ .*/, "", $1); print $1, $3, $4}}' \
-            "$(dirname {output.predictions})/$(basename {input.contigs})_gt1000bp_dvfpred.txt" > {output.predictions}
+        # Сохраняем оригинальный формат DVF (4 столбца)
+        mv "$(dirname {output.predictions})/$(basename {input.contigs})_gt1000bp_dvfpred.txt" {output.predictions}
         """
 
 rule phamb:
