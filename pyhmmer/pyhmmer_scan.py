@@ -3,6 +3,10 @@ import pyhmmer
 from pyhmmer import easel, plan7
 import argparse
 
+def safe_decode(value, default="N/A") -> str:
+    """Безопасное декодирование bytes в str с обработкой None"""
+    return value.decode() if value is not None else default
+
 def main():
     parser = argparse.ArgumentParser(
         description='PyHMMER scan: HMMER-compatible hmmscan implementation'
@@ -33,7 +37,7 @@ def main():
         Z=Z
     )
 
-    # 4. Ручное форматирование вывода (аналог --tblout)
+    # 4. Форматирование вывода с обработкой None
     with open(args.output, 'w') as tblout:
         tblout.write("# Target Sequence          Accession  E-value  Score  Bias\n")
         tblout.write("#------------------        ---------  -------  -----  ----\n")
@@ -41,7 +45,9 @@ def main():
         for result in results:
             for hit in result:
                 if hit.evalue <= args.E:
-                    line = f"{hit.name.decode():<25} {hit.accession.decode():<10} " \
+                    name = safe_decode(hit.name, "<no_name>")
+                    accession = safe_decode(hit.accession, "<no_accession>")
+                    line = f"{name:<25} {accession:<10} " \
                            f"{hit.evalue:.1g} {hit.score:.1f} {hit.bias:.1f}\n"
                     tblout.write(line)
 
